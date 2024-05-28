@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>org.cometbid.ecommerce.poc</groupId>
+        <artifactId>ecommerce-serverless-api</artifactId>
+        <version>0.0.1</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    
+    <artifactId>ecommerce-user-api</artifactId>
+    <name>ecommerce-user-api</name>
+    <description>A sample ecommerce application -user management api</description>
+
+    <properties>
+        <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <lombok.version>1.18.30</lombok.version>
+        <log4j2.version>2.22.0</log4j2.version>
+        <mapstruct.version>1.6.0.Beta1</mapstruct.version>
+        <spring.cloud.version>3.1.1</spring.cloud.version>
+        
+        <spring-boot.build-image.imageName>${project.parent.artifactId}-${project.artifactId}</spring-boot.build-image.imageName>
+        <start-class>org.cometbid.sample.ecommerce.api.EcommerceSampleUserApi</start-class>
+    </properties>
+    
+    <developers>
+        <developer>
+            <id>samueladebowale</id>
+            <name>Adebowale Samuel</name>
+            <email>samuel.adebowale@cometbid.org</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>UTC +5:00</timezone>
+        </developer>
+    </developers>
+    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.awspring.cloud</groupId>
+                <artifactId>spring-cloud-aws-dependencies</artifactId>
+                <version>2.4.4</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>bom</artifactId>
+                <version>2.25.9</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <!-- AWS Cloud Libraries -->
+        <dependency>
+            <groupId>io.awspring.cloud</groupId>
+            <artifactId>spring-cloud-aws-starter-sns</artifactId>
+        </dependency>
+        <!--/ AWS Cloud Libraries -->
+        <!-- Metrics gathering tools -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-core</artifactId>
+        </dependency>
+        <dependency> 
+            <groupId>io.micrometer</groupId> 
+            <artifactId>micrometer-registry-cloudwatch2</artifactId> 
+        </dependency> 
+        <!--/ Metrics gathering tools -->
+        <!-- Cometbid components -->
+        <dependency>
+            <groupId>org.cometbid.component</groupId>
+            <artifactId>spring-webresponse-component</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cometbid.component</groupId>
+            <artifactId>cometbid-utility-pkg</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <!--/ Cometbid components -->
+        <!-- Open API starts -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>2.2.20</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-oas</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.7.0</version>
+        </dependency>
+        <!-- Open API ends -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>10.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.2.220</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <!-- RELEASE_VERSION -->
+                <version>7.4.0</version>
+                <!-- /RELEASE_VERSION -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <configHelp>false</configHelp>
+                            <typeMappings>
+                                <typeMapping>
+                                    OffsetDateTime=java.time.OffsetDateTime
+                                </typeMapping>
+                                <typeMapping>
+                                    ZonedDateTime=java.time.ZonedDateTime
+                                </typeMapping>
+                                <typeMapping>
+                                    LocalDateTime=java.time.LocalDateTime
+                                </typeMapping>
+                                <typeMapping>BigDecimal=java.math.BigDecimal</typeMapping>
+                                <typeMapping>AppResponse=org.cometbid.component.api.response.AppResponse</typeMapping>
+                            </typeMappings>
+                            <inputSpec>${project.basedir}/src/main/resources/openapi/openapi3_0.yaml</inputSpec>
+                            <generatorName>spring</generatorName>
+                            <configOptions>
+                                <apiPackage>org.cometbid.openapi.codegen.api</apiPackage>
+                                <modelPackage>org.cometbid.openapi.codegen.model</modelPackage>
+                                <serializableModel>true</serializableModel>
+                                <delegatePattern>true</delegatePattern>
+                                <useJakartaEe>true</useJakartaEe>
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <hateoas>true</hateoas>
+                                <!--
+                                <reactive>true</reactive>
+                                <additionalModelTypeAnnotations>
+                                    @lombok.Builder(toBuilder=true)
+                                    @lombok.NoArgsConstructor
+                                    @lombok.AllArgsConstructor
+                                </additionalModelTypeAnnotations>
+                                -->
+                                <library>spring-boot</library>
+                                <interfaceOnly>true</interfaceOnly>
+                                <useBeanValidation>true</useBeanValidation>
+                                <dateLibrary>java8-localdatetime</dateLibrary>
+                                <output>
+                                    ${project.basedir}/target/generated-sources/openapi</output>
+                                <useTags>true</useTags>
+                            </configOptions>
+                            <globalProperties>
+                                <skipFormModel>false</skipFormModel>
+                            </globalProperties>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <env>
+                            <BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
+                        </env>
+                    </image>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

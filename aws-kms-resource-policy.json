@@ -1,0 +1,31 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "sqs.amazonaws.com"
+      },
+      "Action": ["kms:GenerateDataKey", "kms:Decrypt"],
+      "Resource": "kms-key-arn",
+      "Condition": {
+        "ArnEquals": {
+          "aws:SourceArn": "sqs-queue-arn"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "sns.amazonaws.com"
+      },
+      "Action": ["kms:GenerateDataKey", "kms:Decrypt"],
+      "Resource": "kms-key-arn",
+      "Condition": {
+        "ArnEquals": {
+          "aws:SourceArn": "sns-topic-arn"
+        }
+      }
+    }
+  ]
+}
